@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { ArrowLeft, ArrowRight } from "@phosphor-icons/react";
 import { motion, useReducedMotion } from "motion/react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type KeyboardEvent, type PointerEvent, type WheelEvent } from "react";
 
 export type WorkItem = {
   image: string;
@@ -14,8 +14,13 @@ export type WorkItem = {
 export function WorksFanCarousel({ items }: { items: WorkItem[] }) {
   const reduceMotion = useReducedMotion();
   const stageRef = useRef<HTMLDivElement>(null);
+  const dragStart = useRef<number | null>(null);
+  const hasDragged = useRef(false);
+  const wheelLock = useRef(0);
   const [center, setCenter] = useState(0);
   const [stageWidth, setStageWidth] = useState(1200);
+  const [dragOffset, setDragOffset] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
 
   useEffect(() => {
     const stage = stageRef.current;
@@ -44,9 +49,63 @@ export function WorksFanCarousel({ items }: { items: WorkItem[] }) {
     setCenter((current) => (current + direction + items.length) % items.length);
   };
 
+  const startSwipe = (event: PointerEvent<HTMLDivElement>) => {
+    if (event.button !== 0) return;
+    dragStart.current = event.clientX;
+    hasDragged.current = false;
+    setIsDragging(true);
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const moveSwipe = (event: PointerEvent<HTMLDivElement>) => {
+    if (dragStart.current === null) return;
+    const distance = event.clientX - dragStart.current;
+    if (Math.abs(distance) > 8) hasDragged.current = true;
+    setDragOffset(Math.max(-110, Math.min(110, distance)));
+  };
+
+  const endSwipe = (event: PointerEvent<HTMLDivElement>) => {
+    if (dragStart.current === null) return;
+    const distance = event.clientX - dragStart.current;
+    if (Math.abs(distance) > 45) cycle(distance < 0 ? 1 : -1);
+    dragStart.current = null;
+    setDragOffset(0);
+    setIsDragging(false);
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+    window.setTimeout(() => { hasDragged.current = false; }, 0);
+  };
+
+  const handleWheel = (event: WheelEvent<HTMLDivElement>) => {
+    if (Math.abs(event.deltaX) < 18 || Math.abs(event.deltaX) <= Math.abs(event.deltaY)) return;
+    event.preventDefault();
+    const now = Date.now();
+    if (now - wheelLock.current < 420) return;
+    wheelLock.current = now;
+    cycle(event.deltaX > 0 ? 1 : -1);
+  };
+
+  const handleKeys = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "ArrowLeft") { event.preventDefault(); cycle(-1); }
+    if (event.key === "ArrowRight") { event.preventDefault(); cycle(1); }
+  };
+
   return (
     <div className="works-carousel" aria-roledescription="carosello" aria-label="Lavori realizzati">
-      <div className="works-stage" ref={stageRef}>
+      <div
+        className="works-stage"
+        ref={stageRef}
+        tabIndex={0}
+        data-dragging={isDragging || undefined}
+        aria-label="Trascina orizzontalmente o usa le frecce per sfogliare i lavori"
+        onPointerDown={startSwipe}
+        onPointerMove={moveSwipe}
+        onPointerUp={endSwipe}
+        onPointerCancel={endSwipe}
+        onWheel={handleWheel}
+        onKeyDown={handleKeys}
+      >
         {items.map((item, index) => {
           const distance = positions[index];
           const visible = Math.abs(distance) <= range;
@@ -59,16 +118,19 @@ export function WorksFanCarousel({ items }: { items: WorkItem[] }) {
               aria-label={`${item.label}${distance === 0 ? ", selezionato" : ""}`}
               aria-hidden={!visible}
               tabIndex={visible ? 0 : -1}
-              onClick={() => setCenter(index)}
+              onClick={(event) => {
+                if (hasDragged.current) { event.preventDefault(); return; }
+                setCenter(index);
+              }}
               animate={{
-                x: distance * spacing,
+                x: distance * spacing + dragOffset,
                 y: depth * (stageWidth < 560 ? 13 : 22),
                 rotate: distance * (stageWidth < 560 ? 5 : 7),
                 scale: visible ? 1 - depth * 0.075 : 0.72,
                 opacity: visible ? 1 : 0,
               }}
               transition={
-                reduceMotion
+                reduceMotion || isDragging
                   ? { duration: 0 }
                   : { type: "spring", stiffness: 210, damping: 28, mass: 0.8 }
               }
