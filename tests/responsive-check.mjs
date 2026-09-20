@@ -79,7 +79,7 @@ try {
       width,
       height,
       deviceScaleFactor: 1,
-      mobile: width < 768,
+      mobile: false,
     });
     await send("Page.navigate", { url: `http://127.0.0.1:3001/?viewport=${width}` });
     await new Promise((resolve) => setTimeout(resolve, 900));

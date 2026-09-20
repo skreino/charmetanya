@@ -14,6 +14,7 @@ import {
 } from "@phosphor-icons/react/dist/ssr";
 import { HeroImage } from "@/components/hero-image";
 import { Reveal } from "@/components/reveal";
+import { TestimonialMarquee } from "@/components/ui/testimonial-marquee";
 
 const whatsapp =
   "https://wa.me/393939272132?text=Ciao%20Charme%20Tanya%2C%20vorrei%20richiedere%20un%20appuntamento.";
@@ -49,18 +50,43 @@ const services = [
 const reviews = [
   {
     name: "Federica Schenoni",
-    text: "Finalmente ho trovato il colore ideale. Capelli morbidi, idratati e lucenti. Ambiente rilassante, amichevole e persone competenti.",
-    service: "Colore e piega",
+    text: "Finalmente posso dire di aver trovato il colore ideale. Capelli morbidi, idratati e lucenti. Ambiente rilassante e persone competenti.",
+    date: "10 mesi fa",
   },
   {
     name: "Valeria Pernice",
-    text: "Professionalità impareggiabile. Riescono a capire le mie esigenze e a creare ogni volta qualcosa di davvero su misura.",
-    service: "Cliente da dieci anni",
+    text: "Frequento Charme Tanya da dieci anni e posso dire che la loro professionalità è impareggiabile.",
+    date: "11 mesi fa",
   },
   {
-    name: "Veronica Sala",
-    text: "Ho effettuato un massaggio con Tanya ed è stata bravissima. Mi sono sentita a mio agio e davvero rilassata.",
-    service: "Massaggio benessere",
+    name: "veronica sala",
+    text: "Mi sono sentita molto a mio agio e dopo la terapia molto rilassata. Tutto il personale sa come prendersi cura dei clienti.",
+    date: "1 anno fa",
+  },
+  {
+    name: "Marta Santoro",
+    text: "Ambiente accogliente, prezzi onesti, tempi per i trattamenti ottimi. Tanya e le ragazze sono preparate e disponibili.",
+    date: "1 anno fa",
+  },
+  {
+    name: "Cinzi",
+    text: "Personale gentile e simpatico, servizio perfetto e preciso. Un lavaggio testa degno di un massaggio in una spa.",
+    date: "3 anni fa",
+  },
+  {
+    name: "Stephanie Felix",
+    text: "Sono rimasta piacevolmente stupita. Che mano leggera!",
+    date: "3 anni fa",
+  },
+  {
+    name: "AnnaRita Baldasarre",
+    text: "Le pieghe durano per giorni, senza fare una piega. È semplicemente pura verità.",
+    date: "8 anni fa",
+  },
+  {
+    name: "liliana litti",
+    text: "Tanya è molto brava e competente. Ti fa sentire a tuo agio e ti dà ottimi consigli.",
+    date: "8 anni fa",
   },
 ];
 
@@ -93,7 +119,7 @@ const jsonLd = {
   aggregateRating: {
     "@type": "AggregateRating",
     ratingValue: "4.8",
-    reviewCount: "51",
+    reviewCount: "52",
   },
   sameAs: [
     "https://www.facebook.com/charmetanya/",
@@ -170,7 +196,7 @@ export default function Home() {
         <section className="trust-band" aria-label="Dati e recensioni">
           <div className="section-shell trust-grid">
             <div><strong>4,8</strong><span><Star size={16} weight="fill" /> Valutazione Google</span></div>
-            <div><strong>51</strong><span>Recensioni pubbliche</span></div>
+            <div><strong>52</strong><span>Recensioni pubbliche</span></div>
             <div><strong>1987</strong><span>Il primo giorno a Busnago</span></div>
             <a href={googleProfile} target="_blank" rel="noreferrer">
               Leggi le recensioni <ArrowUpRight size={18} />
@@ -256,10 +282,19 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="gallery section-shell">
-          <Reveal className="section-heading gallery-heading">
-            <h2>Gesti precisi. Risultati che parlano di te.</h2>
-          </Reveal>
+        <section id="galleria" className="gallery section-shell">
+          <div className="gallery-intro">
+            <Reveal className="gallery-note">
+              <FlowerLotus size={36} weight="light" aria-hidden="true" />
+              <div>
+                <p>Dal 1987, ogni risultato nasce dall'ascolto.</p>
+                <span>Capelli · estetica · benessere</span>
+              </div>
+            </Reveal>
+            <Reveal className="section-heading gallery-heading">
+              <h2>Gesti precisi. Risultati che parlano di te.</h2>
+            </Reveal>
+          </div>
           <div className="gallery-grid">
             <Reveal className="gallery-item gallery-a">
               <Image src="/images/precision-cut.jpg" alt="Taglio di precisione" fill sizes="(max-width: 767px) 100vw, 40vw" />
@@ -279,22 +314,12 @@ export default function Home() {
         <section id="recensioni" className="reviews anchored-section">
           <div className="section-shell">
             <Reveal className="reviews-intro">
-              <div className="rating-lockup"><Star size={22} weight="fill" /><strong>4,8 su 5</strong><span>51 recensioni Google</span></div>
+              <div className="rating-lockup"><Star size={22} weight="fill" /><strong>4,8 su 5</strong><span>52 recensioni Google</span></div>
               <h2>La fiducia si costruisce, appuntamento dopo appuntamento.</h2>
             </Reveal>
-
-            <div className="review-row">
-              {reviews.map((review, index) => (
-                <Reveal key={review.name} className="review-card" delay={index * 0.07}>
-                  <div className="review-stars" role="img" aria-label="5 stelle">
-                    {[0, 1, 2, 3, 4].map((star) => <Star key={star} size={16} weight="fill" />)}
-                  </div>
-                  <blockquote>“{review.text}”</blockquote>
-                  <footer><strong>{review.name}</strong><span>{review.service}</span></footer>
-                </Reveal>
-              ))}
-            </div>
-
+          </div>
+          <TestimonialMarquee items={reviews} />
+          <div className="section-shell">
             <a className="text-link reviews-link" href={googleProfile} target="_blank" rel="noreferrer">
               Tutte le recensioni <ArrowUpRight size={18} />
             </a>
