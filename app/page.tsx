@@ -211,6 +211,14 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="care-interlude" aria-label="La filosofia di Charme Tanya">
+          <div className="section-shell care-interlude-inner">
+            <FlowerLotus size={42} weight="light" aria-hidden="true" />
+            <p>Ogni gesto racconta <em>qualcosa di te.</em></p>
+            <span>Ascolto, tecnica, cura.</span>
+          </div>
+        </section>
+
         <section id="storia" className="story anchored-section">
           <div className="section-shell story-grid">
             <div className="story-images" aria-label="Momenti di cura nel salone">
