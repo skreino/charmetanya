@@ -15,6 +15,7 @@ import {
 import { HeroImage } from "@/components/hero-image";
 import { Reveal } from "@/components/reveal";
 import { TestimonialMarquee } from "@/components/ui/testimonial-marquee";
+import { WorksFanCarousel } from "@/components/ui/works-fan-carousel";
 
 const whatsapp =
   "https://wa.me/393939272132?text=Ciao%20Charme%20Tanya%2C%20vorrei%20richiedere%20un%20appuntamento.";
@@ -90,6 +91,17 @@ const reviews = [
   },
 ];
 
+const works = [
+  { image: "/images/blonde-finish.jpg", alt: "Piega luminosa su capelli biondi", label: "Piega luminosa" },
+  { image: "/images/precision-cut.jpg", alt: "Taglio di precisione in salone", label: "Taglio su misura" },
+  { image: "/images/salon-finish.jpg", alt: "Styling professionale con onde morbide", label: "Onde morbide" },
+  { image: "/images/blow-dry.jpg", alt: "Asciugatura professionale dei capelli", label: "Styling" },
+  { image: "/images/color-ritual.jpg", alt: "Preparazione professionale del colore", label: "Rituale colore" },
+  { image: "/images/hair-detail.jpg", alt: "Dettaglio di capelli sani e lucenti", label: "Cura e luminosità" },
+  { image: "/images/hero-styling.jpg", alt: "Lavorazione professionale su capelli castani", label: "Finish naturale" },
+  { image: "/images/color-care.jpg", alt: "Trattamento colore eseguito in salone", label: "Colore personalizzato" },
+];
+
 const hours = [
   ["Martedì", "9:00-12:00 / 14:30-18:30"],
   ["Mercoledì", "9:00-12:00 / 15:30-19:30"],
@@ -104,7 +116,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "BeautySalon",
   name: "Charme Tanya Acconciature estetica e benessere",
-  image: "https://charmetanya.vercel.app/images/hero-styling.jpg",
+  image: "https://charmetanya.vercel.app/images/hero-averie-woodard.jpg",
   url: "https://charmetanya.vercel.app",
   telephone: "+393939272132",
   priceRange: "€€",
@@ -172,14 +184,14 @@ export default function Home() {
           <HeroImage />
           <div className="hero-shade" />
           <div className="hero-copy section-shell">
-            <p className="eyebrow">Acconciature, estetica, benessere</p>
+            <p className="eyebrow">Il tuo salone a Busnago dal 1987</p>
             <h1>
-              <span>La tua bellezza,</span>
-              <span>raccontata <em>su misura.</em></span>
+              <span>Capelli da sogno,</span>
+              <span><em>stile su misura.</em></span>
             </h1>
             <div className="hero-bottom">
               <p className="hero-lead">
-                Colore, stile e benessere pensati per farti sentire davvero te stessa.
+                Colore, piega e trattamenti pensati per valorizzare la tua bellezza.
               </p>
               <div className="hero-actions">
                 <a className="button button-light" href={whatsapp} target="_blank" rel="noreferrer">
@@ -282,33 +294,14 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="galleria" className="gallery section-shell">
-          <div className="gallery-intro">
-            <Reveal className="gallery-note">
-              <FlowerLotus size={36} weight="light" aria-hidden="true" />
-              <div>
-                <p>Dal 1987, ogni risultato nasce dall'ascolto.</p>
-                <span>Capelli · estetica · benessere</span>
-              </div>
-            </Reveal>
-            <Reveal className="section-heading gallery-heading">
-              <h2>Gesti precisi. Risultati che parlano di te.</h2>
+        <section id="galleria" className="gallery anchored-section">
+          <div className="section-shell works-intro">
+            <Reveal>
+              <h2>Il nostro lavoro, <em>da vicino.</em></h2>
+              <p>Tagli, colore e styling costruiti sulla persona. Sfoglia una selezione dei risultati firmati Charme Tanya.</p>
             </Reveal>
           </div>
-          <div className="gallery-grid">
-            <Reveal className="gallery-item gallery-a">
-              <Image src="/images/precision-cut.jpg" alt="Taglio di precisione" fill sizes="(max-width: 767px) 100vw, 40vw" />
-            </Reveal>
-            <Reveal className="gallery-item gallery-b" delay={0.06}>
-              <Image src="/images/blonde-finish.jpg" alt="Piega morbida su capelli biondi" fill sizes="(max-width: 767px) 100vw, 32vw" />
-            </Reveal>
-            <Reveal className="gallery-item gallery-c" delay={0.12}>
-              <Image src="/images/color-ritual.jpg" alt="Applicazione professionale del colore" fill sizes="(max-width: 767px) 100vw, 28vw" />
-            </Reveal>
-            <Reveal className="gallery-item gallery-d" delay={0.18}>
-              <Image src="/images/blow-dry.jpg" alt="Asciugatura e styling in salone" fill sizes="(max-width: 767px) 100vw, 45vw" />
-            </Reveal>
-          </div>
+          <WorksFanCarousel items={works} />
         </section>
 
         <section id="recensioni" className="reviews anchored-section">

@@ -21,12 +21,12 @@ export function HeroImage() {
     <div className="hero-media">
       <div ref={scope} className="hero-media-inner">
         <Image
-          src="/images/hero-styling.jpg"
-          alt="Piega professionale su capelli castani luminosi"
+          src="/images/hero-averie-woodard.jpg"
+          alt="Donna con lunghi capelli biondi mossi su sfondo rosa"
           fill
           priority
           fetchPriority="high"
-          sizes="(max-width: 767px) calc(100vw - 40px), 55vw"
+          sizes="100vw"
           className="object-cover"
         />
       </div>
