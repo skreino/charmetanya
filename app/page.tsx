@@ -116,7 +116,7 @@ export default function Home() {
 
       <header className="site-header">
         <a href="#top" className="brand" aria-label="Charme Tanya, torna all'inizio">
-          <Image src="/images/logo-compact.png" alt="Charme Tanya" width={150} height={100} priority />
+          <Image src="/images/logo-wordmark-fixed.png" alt="Charme Tanya" width={720} height={214} priority unoptimized />
         </a>
 
         <nav className="desktop-nav" aria-label="Navigazione principale">
@@ -142,28 +142,27 @@ export default function Home() {
       </header>
 
       <main id="top">
-        <section className="hero section-shell">
-          <div className="hero-copy">
+        <section className="hero">
+          <HeroImage />
+          <div className="hero-shade" />
+          <div className="hero-copy section-shell">
             <p className="eyebrow">Acconciature, estetica, benessere</p>
-            <h1>La tua bellezza, raccontata su misura.</h1>
-            <p className="hero-lead">
-              Colore, stile e trattamenti benessere pensati per farti sentire davvero te stessa.
-            </p>
-            <div className="hero-actions">
-              <a className="button button-rose" href={whatsapp} target="_blank" rel="noreferrer">
-                Prenota ora <WhatsappLogo size={20} weight="fill" />
-              </a>
-              <a className="text-link" href="tel:+393939272132">
-                Chiama <Phone size={18} />
-              </a>
-            </div>
-          </div>
-
-          <div className="hero-visual">
-            <HeroImage />
-            <div className="hero-stamp" aria-label="Attività aperta dal 1987">
-              <span>Dal</span>
-              <strong>1987</strong>
+            <h1>
+              <span>La tua bellezza,</span>
+              <span>raccontata <em>su misura.</em></span>
+            </h1>
+            <div className="hero-bottom">
+              <p className="hero-lead">
+                Colore, stile e benessere pensati per farti sentire davvero te stessa.
+              </p>
+              <div className="hero-actions">
+                <a className="button button-light" href={whatsapp} target="_blank" rel="noreferrer">
+                  Prenota ora <WhatsappLogo size={20} weight="fill" />
+                </a>
+                <a className="text-link text-link-light" href="tel:+393939272132">
+                  Chiama <Phone size={18} />
+                </a>
+              </div>
             </div>
           </div>
         </section>
@@ -340,7 +339,7 @@ export default function Home() {
       <footer className="footer">
         <div className="section-shell footer-grid">
           <div className="footer-brand">
-            <Image src="/images/logo-compact.png" alt="Charme Tanya" width={180} height={120} />
+            <Image src="/images/logo-wordmark-fixed.png" alt="Charme Tanya" width={720} height={214} unoptimized />
             <p>Acconciature, estetica e benessere a Busnago dal 1987.</p>
           </div>
           <div className="footer-social">
@@ -351,6 +350,7 @@ export default function Home() {
               <FacebookLogo size={24} />
             </a>
           </div>
+          <div className="footer-wordmark" aria-hidden="true">Charme Tanya</div>
           <p className="footer-copy">© {new Date().getFullYear()} Charme Tanya. Tutti i diritti riservati.</p>
         </div>
       </footer>

@@ -4,7 +4,7 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 
 const chromePath = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
-const port = 9223;
+const port = 9300 + (process.pid % 500);
 const profile = path.join(tmpdir(), `charme-tanya-chrome-${process.pid}`);
 const outputDir = path.resolve("artifacts");
 const sizes = [
@@ -123,7 +123,10 @@ try {
   console.table(reports);
   socket.close();
 } finally {
-  chrome.kill();
-  await new Promise((resolve) => chrome.once("exit", resolve));
+  if (chrome.exitCode === null) {
+    const exited = new Promise((resolve) => chrome.once("exit", resolve));
+    chrome.kill();
+    await exited;
+  }
   await rm(profile, { recursive: true, force: true });
 }
