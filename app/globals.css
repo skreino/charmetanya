@@ -987,21 +987,30 @@ summary:focus-visible {
   .reviews-intro { max-width: 22rem; margin-bottom: 30px; }
   .reviews-intro h2 { font-size: clamp(2.75rem, 11.7vw, 3.6rem); line-height: 0.98; }
   .testimonial-marquee {
-    overflow: visible;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
     border-bottom: 0;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 16px;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
-  .testimonial-track { display: block; width: auto; animation: none; transform: none; will-change: auto; }
-  .testimonial-list { display: grid; padding: 0 16px; }
+  .testimonial-marquee::-webkit-scrollbar { display: none; }
+  .testimonial-track { display: block; width: max-content; animation: none; transform: none; will-change: auto; }
+  .testimonial-list { display: flex; width: max-content; padding: 0 16px; }
   .testimonial-list-copy { display: none; }
   .testimonial-card {
-    width: 100%;
-    min-height: 0;
-    padding: 24px 0 22px;
-    border-right: 0;
-    border-bottom: 1px solid var(--line);
+    width: min(84vw, 390px);
+    min-height: 300px;
+    padding: 26px 22px 24px;
+    border-right: 1px solid var(--line);
+    border-bottom: 0;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
-  .testimonial-card:nth-child(n + 4) { display: none; }
-  .testimonial-card blockquote { max-width: 34rem; margin: 22px 0 26px; font-size: 1.08rem; line-height: 1.42; }
+  .testimonial-card blockquote { max-width: 34rem; margin: 24px 0 28px; font-size: 1.08rem; line-height: 1.42; }
   .review-summary-inner { align-items: flex-start; flex-direction: column; gap: 18px; min-height: 0; padding-block: 28px calc(96px + env(safe-area-inset-bottom)); }
   .review-summary-band .rating-lockup strong { font-size: 1.75rem; }
   .reviews-link { min-height: 40px; padding-block: 7px; }
