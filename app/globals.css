@@ -622,17 +622,14 @@ summary:focus-visible {
 .works-controls strong { color: var(--ink); font-size: 1rem; font-weight: 500; }
 
 .reviews {
-  padding-block: clamp(92px, 10vw, 150px) clamp(72px, 7vw, 104px);
+  padding-top: clamp(82px, 8vw, 126px);
   overflow: hidden;
   background: var(--paper-soft);
 }
 
 .reviews-intro {
-  display: grid;
-  grid-template-columns: 0.3fr 0.7fr;
-  gap: 8%;
-  align-items: end;
-  margin-bottom: 64px;
+  max-width: 1080px;
+  margin-bottom: clamp(36px, 4vw, 56px);
 }
 
 .rating-lockup {
@@ -720,7 +717,23 @@ summary:focus-visible {
 }
 
 .testimonial-card footer strong { font-size: 0.78rem; }
-.reviews-link { margin-top: 34px; }
+.review-summary-band {
+  background: var(--rose-dark);
+  color: var(--white);
+}
+
+.review-summary-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  min-height: 142px;
+}
+
+.review-summary-band .rating-lockup { color: var(--white); }
+.review-summary-band .rating-lockup strong { color: var(--white); }
+.review-summary-band .rating-lockup span { color: rgba(248, 247, 243, 0.72); }
+.reviews-link { color: var(--white); }
 
 @keyframes testimonial-scroll {
   to { transform: translate3d(-50%, 0, 0); }
@@ -941,18 +954,21 @@ summary:focus-visible {
   .trust-grid > div:nth-child(2) { border-right: 0; }
   .trust-grid > div:nth-child(3) { grid-column: 1 / -1; border-top: 1px solid rgba(32, 35, 33, 0.2); border-right: 0; }
   .trust-grid > a { min-height: 56px; }
-  .manifesto { padding-block: 110px; }
+  .manifesto { padding-block: 72px 58px; }
   .manifesto > div { display: block; }
-  .manifesto-kicker { margin-bottom: 30px; }
-  .manifesto h2 { font-size: clamp(3.1rem, 14vw, 4.5rem); }
-  .manifesto > div > p:last-child { margin: 28px 0 0; }
-  .services { padding-bottom: 110px; }
-  .section-heading { margin-bottom: 34px; }
-  .section-heading h2, .story-copy h2, .reviews-intro h2, .contact-copy h2 { font-size: clamp(3rem, 13vw, 4.25rem); }
+  .manifesto-kicker { margin-bottom: 18px; font-size: 1.15rem; }
+  .manifesto h2 { max-width: 10ch; font-size: clamp(2.85rem, 11.8vw, 3.7rem); line-height: 0.98; }
+  .manifesto > div > p:last-child { max-width: 38rem; margin: 22px 0 0; font-size: 0.9rem; line-height: 1.55; }
+  .services { padding-bottom: 82px; }
+  .section-heading { max-width: 34rem; margin-bottom: 28px; }
+  .section-heading h2 { font-size: clamp(2.8rem, 11.6vw, 3.7rem); line-height: 0.98; }
+  .story-copy h2, .contact-copy h2 { font-size: clamp(3rem, 13vw, 4.25rem); }
   .services-grid { grid-template-columns: 1fr; grid-template-rows: none; min-height: 0; }
-  .service-panel, .service-hair { grid-row: auto; min-height: 520px; }
-  .service-beauty, .service-wellness { min-height: 420px; }
-  .service-content { padding: 28px; }
+  .service-panel, .service-hair { grid-row: auto; min-height: 440px; }
+  .service-beauty, .service-wellness { min-height: 350px; }
+  .service-content { padding: 26px; }
+  .service-content h3 { font-size: 2.7rem; }
+  .service-content p { line-height: 1.5; }
   .story { padding-block: 105px; }
   .story-grid { grid-template-columns: 1fr; gap: 66px; }
   .story-images { min-height: 590px; }
@@ -967,9 +983,31 @@ summary:focus-visible {
   .works-stage { height: 500px; }
   .work-card { width: min(62vw, 270px); height: 450px; }
   .works-controls { margin-top: 2px; }
-  .reviews { padding-block: 100px; }
-  .reviews-intro { grid-template-columns: 1fr; gap: 32px; margin-bottom: 44px; }
-  .testimonial-card { width: 84vw; min-height: 320px; }
+  .reviews { padding-top: 74px; }
+  .reviews-intro { max-width: 22rem; margin-bottom: 30px; }
+  .reviews-intro h2 { font-size: clamp(2.75rem, 11.7vw, 3.6rem); line-height: 0.98; }
+  .testimonial-marquee {
+    overflow-x: auto;
+    scroll-padding-inline: 16px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    overscroll-behavior-inline: contain;
+  }
+  .testimonial-marquee::-webkit-scrollbar { display: none; }
+  .testimonial-track { animation: none; transform: none; will-change: auto; }
+  .testimonial-list { padding-left: 16px; }
+  .testimonial-list-copy { display: none; }
+  .testimonial-card {
+    width: calc(100vw - 32px);
+    min-height: 284px;
+    padding: 24px 20px 22px;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+  .testimonial-card blockquote { margin: 28px 0 32px; font-size: 1.15rem; line-height: 1.38; }
+  .review-summary-inner { align-items: flex-start; flex-direction: column; gap: 18px; min-height: 0; padding-block: 28px 32px; }
+  .review-summary-band .rating-lockup strong { font-size: 1.75rem; }
+  .reviews-link { min-height: 40px; padding-block: 7px; }
   .contact { grid-template-columns: 1fr; gap: 58px; padding: 100px 16px; }
   .contact-actions .button { flex: 1; min-width: 142px; }
   .hours { padding-top: 0; }

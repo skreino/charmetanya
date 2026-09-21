@@ -219,16 +219,16 @@ export default function Home() {
         <section className="manifesto section-shell">
           <Reveal>
             <p className="manifesto-kicker">Il tuo tempo. Il tuo stile.</p>
-            <h2>La tecnica conta. Sentirti capita, ancora di più.</h2>
+            <h2>La tecnica conta. L'ascolto, ancora di più.</h2>
             <p>
-              Ogni servizio nasce dall'ascolto. Studiamo linee, colore e trattamenti che rispettano i tuoi capelli, la tua pelle e il modo in cui vuoi sentirti.
+              Linee, colore e trattamenti pensati per rispettare i tuoi capelli, la tua pelle e il modo in cui vuoi sentirti.
             </p>
           </Reveal>
         </section>
 
         <section id="servizi" className="services section-shell anchored-section">
           <Reveal className="section-heading">
-            <h2>Un unico luogo, tre modi di prenderti cura di te.</h2>
+            <h2>Tre modi di prenderti cura di te.</h2>
           </Reveal>
 
           <div className="services-grid">
@@ -307,15 +307,17 @@ export default function Home() {
         <section id="recensioni" className="reviews anchored-section">
           <div className="section-shell">
             <Reveal className="reviews-intro">
-              <div className="rating-lockup"><Star size={22} weight="fill" /><strong>4,8 su 5</strong><span>52 recensioni Google</span></div>
-              <h2>La fiducia si costruisce, appuntamento dopo appuntamento.</h2>
+              <h2>La fiducia, appuntamento dopo appuntamento.</h2>
             </Reveal>
           </div>
           <TestimonialMarquee items={reviews} />
-          <div className="section-shell">
-            <a className="text-link reviews-link" href={googleProfile} target="_blank" rel="noreferrer">
-              Tutte le recensioni <ArrowUpRight size={18} />
-            </a>
+          <div className="review-summary-band">
+            <div className="section-shell review-summary-inner">
+              <div className="rating-lockup"><Star size={22} weight="fill" /><strong>4,8 su 5</strong><span>52 recensioni Google</span></div>
+              <a className="text-link reviews-link" href={googleProfile} target="_blank" rel="noreferrer">
+                Tutte le recensioni <ArrowUpRight size={18} />
+              </a>
+            </div>
           </div>
         </section>
 
