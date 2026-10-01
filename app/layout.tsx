@@ -10,7 +10,7 @@ const body = Manrope({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://charmetanya.vercel.app"),
+  metadataBase: new URL("https://charmetanya.pages.dev"),
   title: {
     default: "Charme Tanya | Acconciature, estetica e benessere a Busnago",
     template: "%s | Charme Tanya",

@@ -116,8 +116,8 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "BeautySalon",
   name: "Charme Tanya Acconciature estetica e benessere",
-  image: "https://charmetanya.vercel.app/images/hero-averie-woodard.jpg",
-  url: "https://charmetanya.vercel.app",
+  image: "https://charmetanya.pages.dev/images/hero-averie-woodard.jpg",
+  url: "https://charmetanya.pages.dev",
   telephone: "+393939272132",
   priceRange: "€€",
   address: {
